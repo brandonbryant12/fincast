@@ -1,9 +1,14 @@
-/** @type {import('tailwindcss').Config} */
-export default {
+// tailwind.config.mjs
+import { defineConfig } from 'tailwindcss'
+
+export default defineConfig({
   content: [
-    "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
+    './index.html',
+    './src/**/*.{js,ts,jsx,tsx}',
     "../../packages/ui/src/**/*.{js,ts,jsx,tsx}",
   ],
-  presets: [require("../../packages/ui/tailwind.config.js")],
-}
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+})

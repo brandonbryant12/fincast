@@ -9,6 +9,8 @@
     "check-types": "turbo run check-types"
   },
   "devDependencies": {
+    "@tailwindcss/postcss": "^4.1.2",
+    "postcss": "^8.5.3",
     "prettier": "^3.5.3",
     "turbo": "^2.5.0",
     "typescript": "5.8.2"
@@ -20,5 +22,9 @@
   "workspaces": [
     "apps/*",
     "packages/*"
-  ]
+  ],
+  "dependencies": {
+    "@tailwindcss/vite": "^4.1.2",
+    "tailwindcss": "^4.1.2"
+  }
 }

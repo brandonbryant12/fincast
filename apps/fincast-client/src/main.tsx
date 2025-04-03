@@ -1,26 +1,25 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import { Button } from '@repo/ui'
-import './index.css' // We'll create this later
+import './index.css'
 
-// Basic route components (can be moved to separate files later)
+
 function Home() {
   return (
-    <div>
-      <h2>Home Page</h2>
-      <Button 
+    <div className="p-4">
+      <h2 className="text-2xl font-bold mb-4">Home Page</h2>
+      <button 
+        className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
         onClick={() => console.log('Hello World')}
-        variant="default"
       >
         Log Hello World
-      </Button>
+      </button>
     </div>
   )
 }
 
 function About() {
-  return <h2>About Page</h2>
+  return <h2 className="text-4xl font-bold">About Page</h2>
 }
 
 const router = createBrowserRouter([
