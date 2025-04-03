@@ -1,4 +1,5 @@
-/* Basic CSS reset and styles */
+@import "@repo/ui/styles/global.css";
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -10,4 +11,4 @@ body {
 
 #root {
   padding: 2rem;
-} 
+}
