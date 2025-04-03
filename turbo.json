@@ -10,7 +10,7 @@
     "fincast-client#build": {
       "dependsOn": ["^build"],
       "inputs": ["$TURBO_DEFAULT$", ".env*"],
-      "outputs": ["dist/**", ".vite/**"]
+      "outputs": ["dist/**"]
     },
     "fincast-server#build": {
       "dependsOn": ["^build"],
