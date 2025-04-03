@@ -1,9 +1,14 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
-// https://vitejs.dev/config/
+import path from 'path';
 export default defineConfig({
     plugins: [react()],
     server: {
-        port: 3000, // Keep the same port as the original setup
+        port: 3000,
+    },
+    resolve: {
+        alias: {
+            '@': path.resolve(__dirname, '../../packages/ui'),
+        },
     },
 });

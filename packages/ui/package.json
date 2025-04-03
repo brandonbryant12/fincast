@@ -4,18 +4,13 @@
   "private": true,
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.js"
+      "import": "./src/index.ts",
+      "types": "./src/index.ts"
     },
-    "./components": {
-      "types": "./dist/components/index.d.ts",
-      "import": "./dist/components/index.js"
-     },
-     "./lib/utils": {
-        "types": "./dist/lib/utils.d.ts",
-        "import": "./dist/lib/utils.js"
-     },
-    "./styles/global.css": "./src/styles/global.css"
+    "./components/*": "./src/components/*",
+    "./lib/*": "./src/lib/*",
+    "./styles/*": "./src/styles/*",
+    "./hooks/*": "./src/hooks/*"
   },
   "scripts": {
     "build": "tsc --project tsconfig.json",
