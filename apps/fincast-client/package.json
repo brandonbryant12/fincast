@@ -1,0 +1,30 @@
+{
+  "name": "fincast-client",
+  "version": "0.1.0",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "preview": "vite preview",
+    "check-types": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@repo/ui": "*",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "react-router-dom": "^6.25.1"
+  },
+  "devDependencies": {
+    "@repo/eslint-config": "*",
+    "@repo/typescript-config": "*",
+    "@types/node": "^22.13.10",
+    "@types/react": "19.0.12",
+    "@types/react-dom": "19.0.4",
+    "@vitejs/plugin-react": "^4.3.1",
+    "eslint": "^9.23.0",
+    "typescript": "5.8.2",
+    "vite": "^5.4.0"
+  }
+}
