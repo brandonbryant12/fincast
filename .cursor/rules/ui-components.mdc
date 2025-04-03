@@ -1,0 +1,213 @@
+---
+description: Use UI componets from UI Package
+globs: *.tsx
+---
+## Component Creation Standards
+
+When creating new UI components for this project, follow these guidelines to ensure consistency and maintainability across the application.
+
+### 1. Use Shadcn UI Components First
+
+Always prefer using existing Shadcn UI components from our UI package before creating custom components:
+
+```typescript
+// PREFERRED: Import from our UI package
+import { Button, Accordion } from "@repo/ui";
+
+// DO NOT: Create new implementations of components that already exist
+```
+
+
+
+If a Shadcn component doesn't exist in our UI package yet, add it using:
+
+```bash
+cd packages/ui
+npm run add:component [component-name]
+```
+
+
+
+Examples of common Shadcn components to use:
+- Button, Card, Input, Select
+- Dialog, Drawer, Sheet
+- Tabs, Accordion
+- Form components
+
+### 2. Component File Structure
+
+All components must follow our simplified file structure:
+
+```
+packages/ui/src/components/[component-name].tsx
+```
+
+Components should be created with TypeScript and follow these patterns:
+
+```typescript
+// Simple component example
+import * as React from "react"
+import { cn } from "@/src/lib/utils"
+
+interface ExampleProps {
+  children: React.ReactNode;
+  className?: string;
+  // Add other props as needed
+}
+
+export function Example({ 
+  children, 
+  className,
+  ...props 
+}: ExampleProps) {
+  return (
+    <div className={cn("base-styling-classes", className)} {...props}>
+      {children}
+    </div>
+  );
+}
+```
+
+### 3. Tailwind CSS Usage
+
+All styling must use Tailwind CSS classes. Avoid inline styles or CSS modules:
+
+```typescript
+// PREFERRED:
+<div className={cn("flex items-center p-4 rounded-lg bg-background", className)}>
+
+// AVOID:
+<div style={{ display: 'flex', padding: '1rem' }}>
+```
+
+For conditional styling, use the `cn` utility:
+
+```typescript
+cn(
+  "base-styles",
+  variant === "primary" && "bg-primary text-primary-foreground",
+  variant === "secondary" && "bg-secondary text-secondary-foreground",
+  className
+)
+```
+
+### 4. Component Exports
+
+After creating a component, export it from the UI package by updating the index file:
+
+1. Export it in the components index file or create one if it doesn't exist:
+
+```typescript
+// packages/ui/src/components/index.ts
+export * from "./button";
+export * from "./your-new-component";
+```
+
+2. Make sure it's exported in the main index file:
+
+```typescript
+// packages/ui/src/index.ts
+export * from "./components";
+```
+
+### 5. Component Variants with cva
+
+For components with multiple variants, use the `class-variance-authority` pattern:
+
+```typescript
+import { cva, type VariantProps } from "class-variance-authority";
+import { cn } from "@/src/lib/utils";
+
+const exampleVariants = cva(
+  "base-styles-here",
+  {
+    variants: {
+      variant: {
+        default: "bg-primary text-primary-foreground",
+        secondary: "bg-secondary text-secondary-foreground",
+        destructive: "bg-destructive text-destructive-foreground",
+      },
+      size: {
+        default: "h-10 px-4",
+        sm: "h-8 px-3 text-sm",
+        lg: "h-12 px-6",
+      },
+    },
+    defaultVariants: {
+      variant: "default",
+      size: "default",
+    },
+  }
+);
+
+interface ExampleProps extends VariantProps<typeof exampleVariants> {
+  className?: string;
+  children: React.ReactNode;
+}
+
+export function Example({ variant, size, className, children }: ExampleProps) {
+  return (
+    <div className={cn(exampleVariants({ variant, size }), className)}>
+      {children}
+    </div>
+  );
+}
+```
+
+### 6. Accessibility
+
+All components must be accessible:
+
+- Use semantic HTML elements (button, nav, article, etc.)
+- Include ARIA attributes when needed
+- Ensure keyboard navigation works
+- Maintain proper contrast ratios
+- Support screen readers
+
+### 7. Component Testing Considerations
+
+When designing components, consider how they will be tested:
+
+- Add `data-testid` attributes to key elements
+- Make sure important state changes are visible in the DOM
+- Consider component composition and reusability
+
+## Using the UI Package in Applications
+
+When using these components in your applications:
+
+```typescript
+// Import components
+import { Button, Card, YourComponent } from "@repo/ui";
+
+// Use them in your application
+function YourApp() {
+  return (
+    <Card>
+      <h2>Your Card Title</h2>
+      <p>Card content goes here</p>
+      <Button variant="primary">Click Me</Button>
+      <YourComponent />
+    </Card>
+  );
+}
+```
+
+Remember to import the UI package styles in your application's global CSS:
+
+```css
+@import "@repo/ui/styles/global.css";
+```
+
+And configure Tailwind to include the UI package in your app's tailwind.config.js:
+
+```javascript
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: [
+    "./src/**/*.{js,ts,jsx,tsx}",
+    "../../packages/ui/src/**/*.{js,ts,jsx,tsx}",
+  ],
+  presets: [require("../../packages/ui/tailwind.config.js")],
+};
+```

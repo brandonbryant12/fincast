@@ -3,13 +3,26 @@
   "version": "0.0.0",
   "private": true,
   "exports": {
-    "./*": "./src/*.tsx"
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./components": {
+      "types": "./dist/components/index.d.ts",
+      "import": "./dist/components/index.js"
+     },
+     "./lib/utils": {
+        "types": "./dist/lib/utils.d.ts",
+        "import": "./dist/lib/utils.js"
+     },
+    "./styles/global.css": "./src/styles/global.css"
   },
   "scripts": {
+    "build": "tsc --project tsconfig.json",
     "lint": "eslint . --max-warnings 0",
     "generate:component": "turbo gen react-component",
     "check-types": "tsc --noEmit",
-    "tw:init": "tailwindcss init -p"
+    "add:component": "npx shadcn@latest add"
   },
   "devDependencies": {
     "@repo/eslint-config": "*",
@@ -22,9 +35,12 @@
     "eslint": "^9.23.0",
     "postcss": "^8.5.3",
     "tailwindcss": "^4.1.2",
+    "tailwindcss-animate": "^1.0.7",
     "typescript": "5.8.2"
   },
   "dependencies": {
+    "@radix-ui/react-accordion": "^1.2.3",
+    "@radix-ui/react-slot": "^1.1.2",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "lucide-react": "^0.487.0",

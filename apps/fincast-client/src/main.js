@@ -1,11 +1,12 @@
-import { jsx as _jsx } from "react/jsx-runtime";
+import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { Button } from '@repo/ui';
 import './index.css'; // We'll create this later
 // Basic route components (can be moved to separate files later)
 function Home() {
-    return _jsx("h2", { children: "Home Page" });
+    return (_jsxs("div", { children: [_jsx("h2", { children: "Home Page" }), _jsx(Button, { onClick: () => console.log('Hello World'), variant: "default", children: "Log Hello World" })] }));
 }
 function About() {
     return _jsx("h2", { children: "About Page" });
